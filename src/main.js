@@ -223,8 +223,8 @@ class GameScene extends Phaser.Scene {
 
 const config = {
     type: Phaser.AUTO,
-    width: 400,
-    height: 224,
+    width: 800, // Largura base maior para melhor aspecto widescreen
+    height: 450, // Proporção 16:9
     parent: 'game-container',
     pixelArt: true,
     physics: {
@@ -236,9 +236,10 @@ const config = {
     },
     scene: GameScene,
     scale: {
-        zoom: Phaser.Scale.MAX_ZOOM,
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
+        mode: Phaser.Scale.FIT, // Escala para preencher mantendo a proporção
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: '100%',
+        height: '100%'
     }
 };
 
