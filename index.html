@@ -8,36 +8,64 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #111;
+            background: radial-gradient(circle at center, #2b1055 0%, #000000 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             color: white;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Press Start 2P', 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+        #game-wrapper {
+            position: relative;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.2), 0 0 10px rgba(0, 0, 0, 0.8);
+            border: 4px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
         }
         #game-container {
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
-            border: 4px solid #333;
-            border-radius: 4px;
+            display: flex;
         }
-        /* Crucial for pixel art crispness */
+        /* CRT overlay effect */
+        #game-wrapper::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
         canvas {
             image-rendering: -moz-crisp-edges;
             image-rendering: -webkit-crisp-edges;
             image-rendering: pixelated;
             image-rendering: crisp-edges;
+            display: block;
         }
         .instructions {
             position: absolute;
             top: 20px;
             left: 20px;
-            background: rgba(0,0,0,0.7);
-            padding: 10px;
-            border-radius: 5px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
             pointer-events: none;
+            text-shadow: 1px 1px 0 #000;
+            font-size: 12px;
+            line-height: 1.5;
         }
+        h3 { margin-top: 0; color: #00E5FF; }
+        b { color: #FFC107; }
     </style>
+    <!-- Load Google Font for retro feeling -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <!-- Load Phaser 3 from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
 </head>
@@ -45,11 +73,13 @@
     <div class="instructions">
         <h3>Controles</h3>
         <p><b>WASD / Setas</b>: Mover</p>
-        <p><b>Espaço</b>: Pular (Duplo pulo habilitado)</p>
+        <p><b>Espaço</b>: Pular</p>
         <p><b>Z / J</b>: Atacar (Espada)</p>
         <p><b>X / K</b>: Defender (Escudo)</p>
     </div>
-    <div id="game-container"></div>
+    <div id="game-wrapper">
+        <div id="game-container"></div>
+    </div>
     <script type="module" src="src/main.js"></script>
 </body>
 </html>

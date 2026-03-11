@@ -16,8 +16,30 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-        this.cameras.main.setBackgroundColor('#201c24'); // Dark theme
+        this.cameras.main.setBackgroundColor('#1a0f2e'); // Night theme
         
+        // Parallax background
+        this.stars = this.add.graphics();
+        this.stars.fillStyle(0xffffff, 0.8);
+        for(let i=0; i<80; i++) {
+            this.stars.fillPoint(Phaser.Math.Between(0, 800), Phaser.Math.Between(0, 224), Phaser.Math.Between(1, 2));
+        }
+        this.stars.setScrollFactor(0.1);
+
+        this.mountains = this.add.graphics();
+        this.mountains.fillStyle(0x3a2e4d, 1);
+        this.mountains.beginPath();
+        this.mountains.moveTo(0, 224);
+        this.mountains.lineTo(80, 80);
+        this.mountains.lineTo(200, 224);
+        this.mountains.lineTo(350, 50);
+        this.mountains.lineTo(550, 224);
+        this.mountains.lineTo(700, 100);
+        this.mountains.lineTo(800, 180);
+        this.mountains.lineTo(800, 224);
+        this.mountains.fillPath();
+        this.mountains.setScrollFactor(0.3);
+
         this.coinsCollected = 0;
 
         // Platform group
